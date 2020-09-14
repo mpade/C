@@ -26,7 +26,7 @@ int menu(student *tab,int newEtudiant,FILE *f)
 {
 
 	int choix;
-	printf("--- EcolePasDirecte te souhaite la bienvenue ! \n\n");
+	printf("--- EcolePasDirecte te souhaite la bienvenue ! --- \n\n");
 	printf("Entrer le nombre qui correspond a votre attente.\n\n");
 	printf("1)Ajouter un ou des etudiants !\n\n");
 	printf("2)Afficher les informations de tous les etudiants !\n\n");
@@ -44,7 +44,6 @@ int menu(student *tab,int newEtudiant,FILE *f)
 
 		displayStudent(tab,newEtudiant,f);
 		break;
-
 
 	case 3:
 
