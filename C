@@ -1,0 +1,97 @@
+#pragma hdrstop
+#pragma argsused
+
+#include <stdio.h>
+
+#ifdef _WIN32
+#include <tchar.h>
+#else
+  typedef char _TCHAR;
+  #define _tmain main
+#endif
+
+typedef struct
+{
+	char nom[20];
+	char prenom[20];
+	char adresse[50];
+	char classe[20];
+}student;
+
+int  menu(student *tab, int newEtudiant,FILE *f);
+void addStudent(student *tab, int newEtudiant,FILE *f);
+void displayStudent(student *tab, int newEtudiant,FILE *f);
+
+int menu(student *tab,int newEtudiant,FILE *f)
+{
+
+	int choix;
+	printf("--- EcolePasDirecte te souhaite la bienvenue ! \n\n");
+	printf("Entrer le nombre qui correspond a votre attente.\n\n");
+	printf("1)Ajouter un ou des etudiants !\n\n");
+	printf("2)Afficher les informations de tous les etudiants !\n\n");
+	printf("3)Quitter !\n\n");
+	scanf("%d", &choix);
+
+	switch (choix)
+	{
+	case 1:
+
+		addStudent(tab,newEtudiant,f);
+		break;
+
+	case 2:
+
+		displayStudent(tab,newEtudiant,f);
+		break;
+
+
+	case 3:
+
+		exit(1);
+		break;
+	}
+
+}
+
+void addStudent(student *tab,int newEtudiant,FILE *f)
+{
+	printf("Quel est votre nom de famille ? \n ");
+	scanf("%s",&tab[newEtudiant].nom);
+	printf("Quel est votre prenom ? \n ");
+	scanf("%s", &tab[newEtudiant].prenom);
+	printf("Quel est votre adresse ?  ");
+	scanf("%s", &tab[newEtudiant].adresse);
+	printf("Dans quel classe etes-vous ?  ");
+	scanf("%s", &tab[newEtudiant].classe);
+	printf("nom : %s , prenom : %s , adresse : %s , classe : %s ", tab[newEtudiant].nom, tab[newEtudiant].prenom, tab[newEtudiant].adresse, tab[newEtudiant].classe);
+
+	newEtudiant++;
+
+	menu(tab,newEtudiant,f);
+
+}
+void displayStudent(student *tab,int newEtudiant,FILE *f)
+{
+
+	int i;
+
+	for(i=0; i<newEtudiant; i++)
+	{
+		printf(" Son nom est : %s \n ",tab[i].nom);
+		printf(" Son prenom est : %s \n",tab[i].prenom);
+		printf(" Il reside a cette adresse : %s \n",tab[i].adresse);
+		printf(" Il est dans la section : %s \n ",tab[i].classe);
+	}
+	menu(tab,newEtudiant,f);
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int newEtudiant = 0;
+	student tab[100];
+	FILE *fichier;
+	menu(tab, newEtudiant,fichier);
+	system("PAUSE");
+	return 0;
+}
